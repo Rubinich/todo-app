@@ -1,11 +1,12 @@
 package app;
 
-public class Main {
-    void main() {
-        IO.println("Hello and welcome!");
+import entities.Task;
+import entities.User;
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            IO.println("i = " + i);
-        }
+public class Main {
+     void main() {
+        int taskNumber = 5;
+        Scanner sc = new Scanner(System.in);
     }
 }
