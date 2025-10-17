@@ -3,7 +3,7 @@ package entities;
 public class User {
     private String username;
     private String password;
-    //private Event[] events;
+    private Event[] events;
 
     public User(String username, Event[] events, String password) {
         this.username = username;
@@ -34,4 +34,5 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
 }
