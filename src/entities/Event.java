@@ -1,12 +1,20 @@
 package entities;
 
+import java.time.LocalDate;
+
 public class Event {
     private String title;
-    private Task[] tasks;
+    private String description;
+    private String location;
+    private LocalDate dueDate;
+    private User organizer;
 
-    public Event(String title, Task[] tasks) {
+    public Event(String title, String description, String location, LocalDate dueDate, User organizer) {
         this.title = title;
-        this.tasks = tasks;
+        this.description = description;
+        this.location = location;
+        this.dueDate = dueDate;
+        this.organizer = organizer;
     }
 
     public String getTitle() {
@@ -17,11 +25,35 @@ public class Event {
         this.title = title;
     }
 
-    public Task[] getTasks() {
-        return tasks;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTasks(Task[] tasks) {
-        this.tasks = tasks;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public User getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(User organizer) {
+        this.organizer = organizer;
     }
 }
