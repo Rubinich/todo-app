@@ -5,14 +5,13 @@ import java.time.LocalDateTime;
 public class Event {
     private String title;
     private String description;
-    private String location;
     private LocalDateTime dueDate;
     private User organizer;
 
-    public Event(String title, String description, String location, LocalDateTime dueDate, User organizer) {
+    // mozda dodati kategoriju poslije za filtriranje
+    public Event(String title, String description, LocalDateTime dueDate, User organizer) {
         this.title = title;
         this.description = description;
-        this.location = location;
         this.dueDate = dueDate;
         this.organizer = organizer;
     }
@@ -31,14 +30,6 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public LocalDateTime getDueDate() {

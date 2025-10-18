@@ -5,26 +5,25 @@ import entities.User;
 import java.util.Scanner;
 
 public class Menu {
+    private static User currentUser = null;
 
-    public static void showMenu(User currentUser) {
-        System.out.println("\n=== GLAVNI IZBORNIK ===");
-        String status = (currentUser != null) ? "Prijavljeni kao: " + currentUser.getUsername() : "Niste prijavljeni.";
-        System.out.println("Status: " + status);
-        System.out.println("1. Registriraj novog korisnika (Max 5)");
-        System.out.println("2. Prijava (Postavi trenutnog korisnika)");
-        System.out.println("3. Kreiraj novi događaj (Za prijavljenog korisnika, Max 5)");
-        System.out.println("4. Prikaži sve događaje");
-        System.out.println("0. Izađi");
-        System.out.print("Unesite odabir: ");
-    }
+    private Menu() {}
 
-    public static void runApp(Planner service, Scanner sc, User currentUser) {
+    public static void runApp(Planner service, Scanner sc) {
         int menuChoice;
 
         System.out.println("### APLIKACIJA ZA PLANIRANJE DOGAĐAJA ###");
 
         while (true) {
-            showMenu(currentUser);
+            System.out.println("\n=== GLAVNI IZBORNIK ===");
+            String status = (currentUser != null) ? "Prijavljeni kao: " + currentUser.getUsername() : "Niste prijavljeni.";
+            System.out.println("Status: " + status);
+            System.out.println("1. Registriraj novog korisnika (Max 5)");
+            System.out.println("2. Prijava (Postavi trenutnog korisnika)");
+            System.out.println("3. Kreiraj novi događaj (Za prijavljenog korisnika, Max 5)");
+            System.out.println("4. Prikaži sve događaje");
+            System.out.println("0. Izađi");
+            System.out.print("Unesite odabir: ");
 
             if (sc.hasNextInt()) {
                 menuChoice = sc.nextInt();

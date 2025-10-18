@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Planner {
-    private static final int MAX_ELEMENTS = 5;
+    private final int MAX_ELEMENTS = 5;
     private Event[] events;
     private User[] users;
     private int eventCounter;
@@ -29,12 +29,12 @@ public class Planner {
         System.out.println("Registriran korisnik " + username + ".");
     }
 
-    public void saveEvent(String title, String description, String location, LocalDateTime dueDate, User organizer) {
+    public void saveEvent(String title, String description, LocalDateTime dueDate, User organizer) {
         if(MAX_ELEMENTS <= eventCounter) {
             System.out.println("Nema mjesta za nove dogadaje!");
             return;
         }
-        Event newEvent = new Event(title, description, location, dueDate, organizer);
+        Event newEvent = new Event(title, description, dueDate, organizer);
         events[eventCounter] = newEvent;
         eventCounter++;
         System.out.println("Dodan novi dogadaj " + title + ".");
@@ -95,14 +95,12 @@ public class Planner {
         String title = sc.nextLine();
         System.out.print("Opis događaja: ");
         String description = sc.nextLine();
-        System.out.print("Lokacija: ");
-        String location = sc.nextLine();
         System.out.print("Datum i vrijeme (D.M.GGGG. HH:MM, npr. 4.5.2023. 16:45): ");
         String date = sc.nextLine();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy. HH:mm");
         LocalDateTime dueDate = LocalDateTime.parse(date, formatter);
-        saveEvent(title, description, location, dueDate, currentUser);
+        saveEvent(title, description, dueDate, currentUser);
     }
 
 }
