@@ -1,15 +1,15 @@
 package entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Event {
     private String title;
     private String description;
     private String location;
-    private LocalDate dueDate;
+    private LocalDateTime dueDate;
     private User organizer;
 
-    public Event(String title, String description, String location, LocalDate dueDate, User organizer) {
+    public Event(String title, String description, String location, LocalDateTime dueDate, User organizer) {
         this.title = title;
         this.description = description;
         this.location = location;
@@ -41,11 +41,11 @@ public class Event {
         this.location = location;
     }
 
-    public LocalDate getDueDate() {
+    public LocalDateTime getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
 

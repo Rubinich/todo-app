@@ -1,6 +1,6 @@
 package entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class PlannerService {
     private static final int MAX_ELEMENTS = 5;
@@ -32,7 +32,7 @@ public class PlannerService {
         return newUser;
     }
 
-    public Event makeEvent(String title, String description, String location, LocalDate dueDate, User organizer) {
+    public Event makeEvent(String title, String description, String location, LocalDateTime dueDate, User organizer) {
         if(MAX_ELEMENTS <= eventCounter) {
             System.out.println("Nema mjesta za nove dogadaje!");
             return null;
@@ -43,5 +43,28 @@ public class PlannerService {
         eventCounter++;
         System.out.println("Dodan novi dogadaj " + title + ".");
         return newEvent;
+    }
+
+    public User findUser(String username) {
+        for (int i = 0; i < userCounter; i++) {
+            if (users[i].getUsername().equals(username)) {
+                return users[i];
+            }
+        }
+        return null;
+    }
+
+    public void printAllEvents() {
+        System.out.println("\n=== POPIS SVIH DOGAĐAJA ===");
+        if (eventCounter == 0) {
+            System.out.println("Trenutno nema kreiranih događaja.");
+            return;
+        }
+
+        for (int i = 0; i < eventCounter; i++) {
+            Event e = events[i];
+            System.out.println((i + 1) + ". " + e.toString() + " (Opis: " + e.getDescription() + ")");
+        }
+        System.out.println("====================================\n");
     }
 }
