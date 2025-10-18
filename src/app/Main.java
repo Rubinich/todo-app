@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Planner service = new Planner();
-        Menu.runApp(service, sc);
+
+        Menu.runMeni(service, sc);
     }
 }

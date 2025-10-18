@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Planner {
-    private final int MAX_ELEMENTS = 5;
+    private static final int MAX_ELEMENTS = 5;
     private Event[] events;
     private User[] users;
     private int eventCounter;
@@ -102,5 +102,6 @@ public class Planner {
         LocalDateTime dueDate = LocalDateTime.parse(date, formatter);
         saveEvent(title, description, dueDate, currentUser);
     }
+
 
 }
