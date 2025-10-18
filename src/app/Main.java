@@ -10,6 +10,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Planner service = new Planner();
 
-        Menu.runMeni(service, sc);
+        Menu.runMenu(service, sc);
     }
 }

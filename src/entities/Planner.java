@@ -6,15 +6,11 @@ import java.util.Scanner;
 
 public class Planner {
     private static final int MAX_ELEMENTS = 5;
-    private Event[] events;
     private User[] users;
-    private int eventCounter;
     private int userCounter;
 
     public Planner() {
-        this.events = new Event[MAX_ELEMENTS];
         this.users = new User[MAX_ELEMENTS];
-        this.eventCounter = 0;
         this.userCounter = 0;
     }
 
@@ -29,17 +25,6 @@ public class Planner {
         System.out.println("Registriran korisnik " + username + ".");
     }
 
-    public void saveEvent(String title, String description, LocalDateTime dueDate, User organizer) {
-        if(MAX_ELEMENTS <= eventCounter) {
-            System.out.println("Nema mjesta za nove dogadaje!");
-            return;
-        }
-        Event newEvent = new Event(title, description, dueDate, organizer);
-        events[eventCounter] = newEvent;
-        eventCounter++;
-        System.out.println("Dodan novi dogadaj " + title + ".");
-    }
-
     public User findUser(String username) {
         for (int i = 0; i < userCounter; i++) {
             if (users[i].getUsername().equals(username)) {
@@ -49,22 +34,8 @@ public class Planner {
         return null;
     }
 
-    //potrebna dorada
-    public void printAllEvents() {
-        System.out.println("\n=== POPIS SVIH DOGAĐAJA ===");
-        if (eventCounter == 0) {
-            System.out.println("Trenutno nema kreiranih događaja.");
-            return;
-        }
-        for (int i = 0; i < eventCounter; i++) {
-            Event e = events[i];
-            System.out.println((i + 1) + ". " + e.toString() + " (Opis: " + e.getDescription() + ")");
-        }
-        System.out.println("====================================\n");
-    }
-
     public void createUser(Scanner sc) {
-        System.out.println("\n=== REGISTRACIJA ===");
+        System.out.println("\n==== REGISTRACIJA ====");
         System.out.print("Korisničko ime: ");
         String username = sc.nextLine();
         System.out.print("Lozinka: ");
@@ -73,7 +44,7 @@ public class Planner {
     }
 
     public User loginUser(Scanner sc) {
-        System.out.println("\n=== PRIJAVA ===");
+        System.out.println("\n==== PRIJAVA ====");
         System.out.print("Unesite korisničko ime: ");
         String username = sc.nextLine();
         System.out.print("Unesite lozinku: ");
@@ -90,7 +61,7 @@ public class Planner {
     }
 
     public void createEvent(Scanner sc, User currentUser) {
-        System.out.println("\n=== KREIRANJE DOGAĐAJA (Organizator: " + currentUser.getUsername() + ") ===");
+        System.out.println("\n==== KREIRANJE DOGAĐAJA (Organizator: " + currentUser.getUsername() + ") ====");
         System.out.print("Naslov događaja: ");
         String title = sc.nextLine();
         System.out.print("Opis događaja: ");
@@ -100,8 +71,10 @@ public class Planner {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy. HH:mm");
         LocalDateTime dueDate = LocalDateTime.parse(date, formatter);
-        saveEvent(title, description, dueDate, currentUser);
+
+        Event newEvent = new Event(title, description, dueDate, currentUser);
+        if(currentUser.addEvent(newEvent)) {
+            System.out.println("Dodan novi dogadaj: " + title);
+        }
     }
-
-
 }
