@@ -23,6 +23,10 @@ public class User {
         return password.equals(pass);
     }
 
+    public int getEventCount() {
+        return eventCount;
+    }
+
     public boolean addEvent(Event newEvent) {
         if (eventCount >= MAX_EVENTS) {
             System.out.println("Korisnik " + username + " je dosegao maksimum dogadaja (5)!");

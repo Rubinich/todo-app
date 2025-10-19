@@ -16,6 +16,7 @@ public class MainMenu {
         while (running) {
             printMenu();
             int menuChoice = getUserChoice(sc);
+            // sredit prvom prilikom
             switch (menuChoice) {
                 case 1 -> service.createUser(sc);
                 case 2 -> currentUser = service.loginUser(sc);
@@ -41,12 +42,13 @@ public class MainMenu {
                         default -> System.out.println("Nepostojeca opcija!");
                     }
                 }
+                case 7 -> service.showEventStatistics();
                 case 0 -> {
                     System.out.println("Izlaz iz aplikacije.");
                     sc.close();
                     running = false;
                 }
-                default -> System.out.println("Nepostojeca opcija!");
+                default -> System.out.println("Nepostojeca opcija! Pokusaj ponovno.");
             }
         }
     }
@@ -63,6 +65,7 @@ public class MainMenu {
         System.out.println("4. Prikazite svoje dogadaje");
         System.out.println("5. Odjava korisnika");
         System.out.println("6. Pretrazite dogadaje (prema organizatoru ili naslovu)");
+        System.out.println("7. Prikaz osoba s najmanje ili najvise zadataka");
         System.out.println("0. Izadi");
         System.out.print("Unesite odabir: ");
     }

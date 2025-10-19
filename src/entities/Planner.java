@@ -99,7 +99,7 @@ public class Planner {
         System.out.print("Unesite naslov dogadaja ili dio naslova: ");
         String titleSearch = sc.nextLine().trim().toLowerCase();
         boolean found = false;
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy. HH:mm");
         for (int i = 0; i < userCounter; i++) {
             if (users[i] == null) continue;
 
@@ -107,10 +107,12 @@ public class Planner {
             for (int j = 0; j < events.length; j++) {
                 Event event = events[j];
                 if (event != null && event.getTitle().toLowerCase().contains(titleSearch)) {
+                    // ubuduce toString override
+                    String formattedDate = event.getDueDate().format(formatter);
                     System.out.println("\nPronaden dogadaj:");
                     System.out.println("Naslov: " + event.getTitle());
                     System.out.println("Opis: " + event.getDescription());
-                    System.out.println("Datum: " + event.getDueDate());
+                    System.out.println("Datum: " + formattedDate);
                     System.out.println("Izradio: " + users[i].getUsername());
                     found = true;
                 }
@@ -120,4 +122,35 @@ public class Planner {
             System.out.println("Nije pronaden dogadaj s tim naslovom.");
         }
     }
+
+    public void showEventStatistics() {
+        if (userCounter == 0) {
+            System.out.println("Nema registriranih korisnika.");
+            return;
+        }
+        User minUser = users[0];
+        User maxUser = users[0];
+        for (int i = 1; i < userCounter; i++) {
+            User current = users[i];
+            if (current == null) continue;
+
+            if (current.getEventCount() < minUser.getEventCount()) {
+                minUser = current;
+            }
+            if (current.getEventCount() > maxUser.getEventCount()) {
+                maxUser = current;
+            }
+        }
+
+        if (minUser.getEventCount() == maxUser.getEventCount()) {
+            System.out.println("Svi korisnici imaju isti broj dogadaja: " + minUser.getEventCount());
+        } else {
+            System.out.println("\n==== STATISTIKA DOGADAJA ====");
+            System.out.println("Korisnik s NAJMANJE dogadaja: " + minUser.getUsername() +
+                    " (" + minUser.getEventCount() + ")");
+            System.out.println("Korisnik s NAJVISE dogadaja: " + maxUser.getUsername() +
+                    " (" + maxUser.getEventCount() + ")");
+        }
+    }
+
 }
