@@ -1,7 +1,7 @@
 package app;
 
 import entities.Planner;
-import menu.Menu;
+import utilities.MainMenu;
 import java.util.Scanner;
 
 public class Main {
@@ -10,6 +10,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Planner service = new Planner();
 
-        Menu.runMenu(service, sc);
+        MainMenu.runMainMenu(service, sc);
     }
 }

@@ -1,17 +1,17 @@
-package menu;
+package utilities;
 
 import entities.Planner;
 import entities.User;
 import java.util.Scanner;
 
-public class Menu {
+public class MainMenu {
     private static User currentUser = null;
 
-    private Menu() {}
+    private MainMenu() {}
 
-    public static void runMenu(Planner service, Scanner sc) {
+    public static void runMainMenu(Planner service, Scanner sc) {
         boolean running = true;
-        System.out.println("#### APLIKACIJA ZA PLANIRANJE DOGAĐAJA ####");
+        System.out.println("#### APLIKACIJA ZA PLANIRANJE DOGADAJA ####");
 
         while (running) {
             printMenu();
@@ -24,17 +24,29 @@ public class Menu {
                     if (currentUser != null) {
                         currentUser.printUserEvents();
                     } else {
-                        System.out.println("Greška: Niste prijavljeni! Prijavite se da biste vidjeli svoje događaje.");
+                        System.out.println("Greska: Niste prijavljeni!");
                     }
                 }
 
                 case 5 -> handleLogout();
+                case 6 -> {
+                    System.out.println("\n=== PRETRAZIVANJE DOGADAJA ===");
+                    System.out.println("1. Pretraga po organizatoru");
+                    System.out.println("2. Pretraga po naslovu");
+                    System.out.print("Odaberite opciju: ");
+                    int searchChoice = getUserChoice(sc);
+                    switch (searchChoice) {
+                        case 1 -> service.searchEventsByOrganizer(sc);
+                        case 2 -> service.searchEventsByTitle(sc);
+                        default -> System.out.println("Nepostojeca opcija!");
+                    }
+                }
                 case 0 -> {
-                    System.out.println("Izlaz iz aplikacije. Doviđenja!");
+                    System.out.println("Izlaz iz aplikacije.");
                     sc.close();
                     running = false;
                 }
-                default -> System.out.println("Nepostojeća opcija. Pokušajte ponovno.");
+                default -> System.out.println("Nepostojeca opcija!");
             }
         }
     }
@@ -48,9 +60,10 @@ public class Menu {
         System.out.println("1. Registriraj novog korisnika (Max 5)");
         System.out.println("2. Prijava korisnika");
         System.out.println("3. Kreiraj novi događaj (Za prijavljenog korisnika, Max 5)");
-        System.out.println("4. Prikažite svoje događaje");
+        System.out.println("4. Prikazite svoje dogadaje");
         System.out.println("5. Odjava korisnika");
-        System.out.println("0. Izađi");
+        System.out.println("6. Pretrazite dogadaje (prema organizatoru ili naslovu)");
+        System.out.println("0. Izadi");
         System.out.print("Unesite odabir: ");
     }
 
@@ -60,7 +73,7 @@ public class Menu {
             sc.nextLine();
             return choice;
         } else {
-            System.out.println("Pogrešan unos! Unesite broj.");
+            System.out.println("Nepostojeca opcija!");
             sc.nextLine();
             return -1;
         }
@@ -68,7 +81,7 @@ public class Menu {
 
     private static void handleCreateEvent(Planner service, Scanner sc) {
         if (currentUser == null) {
-            System.out.println("Greška: Morate biti prijavljeni da biste kreirali događaj!");
+            System.out.println("Greska: Morate biti prijavljeni da biste kreirali dogadaj!");
             return;
         }
         service.createEvent(sc, currentUser);

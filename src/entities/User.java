@@ -33,9 +33,9 @@ public class User {
     }
 
     public void printUserEvents() {
-        System.out.println("\n==== Događaji korisnika " + username + " ====");
+        System.out.println("\n==== Dogadaji korisnika " + username + " ====");
         if (eventCount == 0) {
-            System.out.println("Nema događaja.");
+            System.out.println("Nema dogadaja.");
             return;
         }
         for (int i = 0; i < eventCount; i++) {
