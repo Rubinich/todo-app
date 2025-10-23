@@ -5,16 +5,14 @@ import java.time.LocalDateTime;
 public class Event {
     private final String title;
     private final String description;
-    private final User organizer;
     private final LocalDateTime dueDate;
-    private final String category;
+    private final EventInfo info;
 
     private Event(EventBuilder builder) {
         this.title = builder.title;
         this.description = builder.description;
-        this.organizer = builder.organizer;
         this.dueDate = builder.dueDate;
-        this.category = builder.category;
+        this.info = new EventInfo(builder.organizer, builder.category);
     }
 
     public static class EventBuilder{
@@ -44,8 +42,7 @@ public class Event {
     public String getTitle() { return title; }
     public String getDescription() { return description; }
     public LocalDateTime getDueDate() { return dueDate; }
-    public String getCategory() { return category; }
-    public User getOrganizer() { return organizer; }
+    public EventInfo getInfo() { return info; }
 
     @Override
     public String toString() {
@@ -53,7 +50,7 @@ public class Event {
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", dueDate=" + dueDate +
-                ", category='" + category + '\'' +
-                ", organizer=" + organizer.getUsername() + '}';
+                ", category='" + info.category() + '\'' +
+                ", organizer=" + info.organizer().getUsername() + '}';
     }
 }

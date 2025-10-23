@@ -16,16 +16,9 @@ public class User {
     }
 
     public String getUsername() { return username; }
-
     public Event[] getEvents() { return events; }
-
-    public boolean checkPassword(String pass) {
-        return password.equals(pass);
-    }
-
-    public int getEventCount() {
-        return eventCount;
-    }
+    public boolean checkPassword(String pass) { return password.equals(pass); }
+    public int getEventCount() { return eventCount; }
 
     public void addEvent(Event newEvent) {
         if (eventCount >= MAX_EVENTS) {
