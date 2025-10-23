@@ -72,10 +72,11 @@ public class Planner {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy. HH:mm");
         LocalDateTime dueDate = LocalDateTime.parse(date, formatter);
 
-        Event newEvent = new Event(title, description, dueDate, currentUser);
-        if(currentUser.addEvent(newEvent)) {
-            System.out.println("Dodan novi dogadaj: " + title);
-        }
+        System.out.print("Kategorija (kuca, posao, servis, ...): ");
+        String category = sc.nextLine();
+
+        Event newEvent = new Event.EventBuilder(title, description, currentUser, dueDate).category(category).build();
+        currentUser.addEvent(newEvent);
     }
 
     public void searchEventsByOrganizer(Scanner sc) {

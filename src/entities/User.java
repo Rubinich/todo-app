@@ -27,13 +27,13 @@ public class User {
         return eventCount;
     }
 
-    public boolean addEvent(Event newEvent) {
+    public void addEvent(Event newEvent) {
         if (eventCount >= MAX_EVENTS) {
             System.out.println("Korisnik " + username + " je dosegao maksimum dogadaja (5)!");
-            return false;
+            return;
         }
         events[eventCount++] = newEvent;
-        return true;
+        System.out.println("Dogadaj \"" + newEvent.getTitle() + "\" dodan korisniku " + username + ".");
     }
 
     public void printUserEvents() {

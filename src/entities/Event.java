@@ -3,32 +3,57 @@ package entities;
 import java.time.LocalDateTime;
 
 public class Event {
-    private String title;
-    private String description;
-    private LocalDateTime dueDate;
-    private User organizer;
+    private final String title;
+    private final String description;
+    private final User organizer;
+    private final LocalDateTime dueDate;
+    private final String category;
 
-    // mozda dodati kategoriju poslije za filtriranje
-    public Event(String title, String description, LocalDateTime dueDate, User organizer) {
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.organizer = organizer;
+    private Event(EventBuilder builder) {
+        this.title = builder.title;
+        this.description = builder.description;
+        this.organizer = builder.organizer;
+        this.dueDate = builder.dueDate;
+        this.category = builder.category;
     }
 
-    public String getTitle() {
-        return title;
+    public static class EventBuilder{
+        private final String title;
+        private final String description;
+        private final User organizer;
+        private final LocalDateTime dueDate;
+        private String category = "generalno";
+
+        public EventBuilder(String title, String description, User organizer, LocalDateTime dueDate) {
+            this.title = title;
+            this.description = description;
+            this.organizer = organizer;
+            this.dueDate = dueDate;
+        }
+
+        public EventBuilder category(String category) {
+            this.category = category;
+            return this;
+        }
+
+        public Event build() {
+            return new Event(this);
+        }
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getTitle() { return title; }
+    public String getDescription() { return description; }
+    public LocalDateTime getDueDate() { return dueDate; }
+    public String getCategory() { return category; }
+    public User getOrganizer() { return organizer; }
 
-    public LocalDateTime getDueDate() {
-        return dueDate;
-    }
-
-    public User getOrganizer() {
-        return organizer;
+    @Override
+    public String toString() {
+        return "Event{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", dueDate=" + dueDate +
+                ", category='" + category + '\'' +
+                ", organizer=" + organizer.getUsername() + '}';
     }
 }
